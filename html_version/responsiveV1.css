@@ -1,0 +1,59 @@
+/* Responsive Styles for Home Page */
+@media (max-width: 1200px) {
+    .banner-content h1 {
+        font-size: 40px;
+    }
+    
+    .dish-container {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px;
+    }
+    
+    .banner-content h1 {
+        font-size: 32px;
+    }
+    
+    .banner-content p {
+        font-size: 16px;
+    }
+    
+    .dish-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .dish {
+        width: 280px;
+    }
+    
+    .testimonial {
+        padding: 30px 20px;
+        margin-top: 50px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-content h1 {
+        font-size: 28px;
+    }
+    
+    .signature-dishes h2,
+    .customer-testimonials h2 {
+        font-size: 24px;
+    }
+    
+    .dish {
+        width: 100%;
+        max-width: 250px;
+    }
+}

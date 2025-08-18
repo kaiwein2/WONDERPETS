@@ -1,0 +1,229 @@
+/* Cleaning Services Layout */
+.services-container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: 60px;
+    background: #f8f9fa;
+}
+
+.services-sidebar {
+    width: 280px;
+    background: #6c93ff;
+    padding: 30px 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 80px;
+    margin-top: 20px;
+    height: fit-content;
+}
+
+.services-sidebar h2 {
+    color: white;
+    font-family: 'David Libre', serif;
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.service-tab {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+}
+
+.service-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.service-tab.active {
+    background: white;
+    color: #6c93ff;
+    border-color: white;
+    font-weight: 600;
+}
+
+.services-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1200px;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.services-header h1 {
+    font-family: 'David Libre', serif;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.services-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.service-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6c93ff, #4a7bff);
+}
+
+.service-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.service-card h3 {
+    font-family: 'David Libre', serif;
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.service-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.service-details {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.service-details span {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #e9ecef;
+}
+
+.duration {
+    background: #e3f2fd !important;
+    color: #1976d2 !important;
+    border-color: #bbdefb !important;
+}
+
+.coverage {
+    background: #f3e5f5 !important;
+    color: #7b1fa2 !important;
+    border-color: #ce93d8 !important;
+}
+
+.service-card .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6c93ff;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.book-btn {
+    background: #6c93ff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.book-btn:hover {
+    background: #5a7fd8;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+    }
+    
+    .services-sidebar {
+        width: 100%;
+        padding: 20px;
+        position: relative;
+        top: 0;
+    }
+    
+    .services-content {
+        padding: 20px;
+    }
+    
+    .service-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .services-header h1 {
+        font-size: 28px;
+    }
+    
+    .service-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-details {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .service-details span {
+        text-align: center;
+    }
+}

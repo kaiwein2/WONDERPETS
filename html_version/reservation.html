@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reservations – Super Linis</title>
+  <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="RES.css"/>
+  <link rel="stylesheet" href="headerv1.css"/>
+  <style>
+    .alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 30px 50px;
+        border-radius: 10px;
+        font-size: 18px;
+        z-index: 1000;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.5s ease-out;
+        min-width: 300px;
+        backdrop-filter: blur(5px);
+        display: none;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -40%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .alert-success {
+        background-color: rgba(76, 175, 80, 0.95);
+        color: white;
+        border: 2px solid #45a049;
+    }
+
+    .alert-error {
+        background-color: rgba(244, 67, 54, 0.95);
+        color: white;
+        border: 2px solid #d32f2f;
+    }
+
+    .alert.fade-out {
+        animation: fadeOut 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+        to {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+            visibility: hidden;
+        }
+    }
+
+    /* Add overlay when alert is shown */
+    .alert::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+  <img src="assets/images/reservation/logo2.png" alt="Super Linis Cleaning Services Logo" class="logo-img" id="header-logo" />
+    </a>
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="nav-list">
+    <li><a href="index.html">Home</a></li>    
+      <li><a href="menu.html">Menu</a></li>      
+        <li><a href="reservation.html">Reservation</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="admin_panel.html" class="button">ADMIN</a></li>
+    </ul>
+  </header>
+
+  <div id="alert" class="alert">
+    <span id="alert-message"></span>
+  </div>
+
+  <section class="reservation-section">
+    <div class="reservation-content">
+      <div class="reservation-text">
+        <h1>Book a Cleaning Appointment<br><span>with Super Linis</span></h1>
+        <p>Need a spotless home or office? Schedule your cleaning service today or email our team at <strong>superliniscleaning@gmail.com</strong></p>
+        <p class="note"><em>Appointments available up to 12 months in advance.</em></p>
+  <img src="assets/images/reservation/Conference Room Cleaning.jpg" alt="Professional Cleaning in Action" class="reservation-image">
+      </div>
+
+      <div class="reservation-form">
+        <form id="reservation-form">
+          <div class="form-row">
+            <input type="text" placeholder="First Name*" name="first-name" required>
+            <input type="text" placeholder="Last Name*" name="last-name" required>
+          </div>
+          <div class="form-row">
+            <input type="email" placeholder="Email*" name="email" required>
+            <input type="tel" placeholder="Phone No.*" name="phone" required>
+          </div>
+          <input type="number" placeholder="No. of Rooms/Areas*" name="party-size" required min="1" max="20">
+
+          <input type="date" id="reservation-date" name="reservation-date" required>
+          <input type="time" id="reservation-time" name="reservation-time" required>
+
+          <label for="special-request">Special Requests</label>
+          <textarea id="special-request" name="special-request" placeholder="ENTER TEXT"></textarea>
+
+          <button type="submit">BOOK CLEANING</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+  <img src="assets/images/reservation/logo1.png" alt="Super Linis Cleaning Services Logo"/>
+        <p>
+          Experience top-tier cleaning for homes, offices, and commercial spaces in Quezon City and beyond.
+          Our dedicated team delivers reliable, thorough, and eco-friendly cleaning with attention to every detail. <a class="learn-more-link" href="about.html">Learn More.</a>
+        </p>
+        <div class="opening-hours">
+          <h5>SERVICE HOURS</h5>
+          <div class="hours-grid">
+            <div class="day">Monday – Friday</div>
+            <div class="day">Saturday</div>
+            <div class="day">Sunday</div>
+            <div class="time">8:00 am to 6:00 pm</div>
+            <div class="time">8:00 am to 4:00 pm</div>
+            <div class="time">CLOSED</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <h4>NAVIGATION</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reservation.html">Reservations</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#"><img src="assets/images/reservation/fb.jpg" alt="Facebook"></a>
+          <a href="#"><img src="assets/images/reservation/twitter.jpg" alt="Twitter"></a>
+          <a href="#"><img src="assets/images/reservation/insta.jpg" alt="Instagram"></a>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+      <div class="copyright">© 2025 Super Linis. All Rights Reserved</div>
+      <div class="legal-links">
+        <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
+    const headerLogo = document.getElementById('header-logo');
+    const dateInput = document.getElementById('reservation-date');
+    const timeInput = document.getElementById('reservation-time');
+    const partySizeInput = document.querySelector('input[name="party-size"]');
+    const reservationForm = document.getElementById('reservation-form');
+    const alertDiv = document.getElementById('alert');
+    const alertMessage = document.getElementById('alert-message');
+
+    function showAlert(message, type) {
+        alertMessage.textContent = message;
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.style.display = 'block';
+        
+        setTimeout(() => {
+            alertDiv.classList.add('fade-out');
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+                alertDiv.classList.remove('fade-out');
+            }, 500);
+        }, 5000);
+    }
+
+    // Handle form submission
+    reservationForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulate form submission
+        const formData = new FormData(this);
+        const firstName = formData.get('first-name');
+        const lastName = formData.get('last-name');
+        
+        // Show success message
+        showAlert(`Thank you ${firstName} ${lastName}! Your reservation request has been submitted. We will contact you shortly to confirm your booking.`, 'success');
+        
+        // Reset form
+        this.reset();
+    });
+
+    mobileMenu.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    window.addEventListener("scroll", function() {
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+
+    if (window.scrollY > 50) {
+      headerLogo.src = 'assets/images/reservation/logo2.png';
+    } else {
+      headerLogo.src = 'assets/images/reservation/logo1.png';
+    }
+    });
+
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.setAttribute("min", today);
+
+    const maxDate = new Date();
+    maxDate.setMonth(maxDate.getMonth() + 12);
+    dateInput.setAttribute("max", maxDate.toISOString().split("T")[0]);
+
+    dateInput.addEventListener('input', function() {
+      const selectedDate = new Date(this.value);
+      const day = selectedDate.getUTCDay();
+      if (day === 6) {
+        alert("Sorry, we are closed on Saturdays. Please choose another date.");
+        this.value = '';
+        timeInput.disabled = true;
+      } else {
+        timeInput.disabled = false;
+      }
+    });
+
+    timeInput.setAttribute('min', '08:00');
+    timeInput.setAttribute('max', '21:00');
+    timeInput.setAttribute('step', '1800');
+
+    timeInput.addEventListener('focus', function() {
+      if (!dateInput.value) {
+        alert("Please select a date first.");
+        timeInput.blur();
+      }
+    });
+
+    partySizeInput.addEventListener('input', function() {
+      if (this.value > 50) {
+        alert("Sorry, we cannot accommodate parties larger than 50 people. Please contact us directly for large events.");
+        this.value = 50;
+      }
+    });
+  </script>
+</body>
+</html>

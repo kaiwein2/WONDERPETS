@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Super Linis</title>
+  <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css"/>
+  <link rel="stylesheet" href="headerv1.css">
+  
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+  <img src="assets/images/contact/logo2.png" alt="Super Linis Cleaning Services Logo" class="logo-img" id="header-logo" />
+    </a>
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <ul class="nav-list">
+    <li><a href="index.html">Home</a></li>    
+      <li><a href="menu.html">Menu</a></li>      
+        <li><a href="reservation.html">Reservation</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="admin_panel.html" class="button">ADMIN</a></li>
+    </ul>
+  </header>
+
+  <section id="contact" class="contact-section">
+    <div class="contact-wrapper">
+      <div class="contact-form">
+  <h1>Contact <span>Super Linis</span></h1>
+  <p>We are here for your cleaning needs! How can we help?</p>
+        <form>
+          <div class="form-row">
+            <input type="text" placeholder="Your Name"/>
+            <input type="text" placeholder="Contact Number"/>
+          </div>
+          <input type="email" placeholder="Your Email"/>
+          <textarea rows="6" placeholder="Message"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <div>
+              <img src="assets/images/contact/location.png" alt="Service Area" class="contact-icon">
+              Quezon City & Metro Manila
+            </div>
+            <div>
+              <img src="assets/images/contact/gmail.png" alt="Email" class="contact-icon">
+              superliniscleaning@gmail.com
+            </div>
+            <div>
+              <img src="assets/images/contact/phone.png" alt="Phone" class="contact-icon">
+              +63 912 345 6789
+            </div>
+          </div>
+          
+      </div>
+      <div class="contact-image">
+  <img src="assets/images/contact/ContactUs.png" alt="Contact Super Linis Cleaning Services"/>
+      </div>
+    </div>
+  </section>
+
+ 
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+  <img src="assets/images/contact/logo1.png" alt="Super Linis Cleaning Services Logo"/>
+        <p>
+          Experience top-tier cleaning for homes, offices, and commercial spaces in Quezon City and beyond.
+          Our dedicated team delivers reliable, thorough, and eco-friendly cleaning with attention to every detail. <a class="learn-more-link" href="about.html">Learn More.</a>
+        </p>
+        <div class="opening-hours">
+            <h5>SERVICE HOURS</h5>
+            <div class="hours-grid">
+              <div class="day">Monday – Friday</div>
+              <div class="day">Saturday</div>
+              <div class="day">Sunday</div>
+              <div class="time">8:00 am to 6:00 pm</div>
+              <div class="time">8:00 am to 4:00 pm</div>
+              <div class="time">CLOSED</div>
+            </div>
+          </div>
+          
+      </div>
+
+      <div class="footer-nav">
+        <h4>NAVIGATION</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="reservation.html">Reservations</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <a href="#"><img src="assets/images/contact/fb.jpg" alt="Facebook"></a>
+          <a href="#"><img src="assets/images/contact/twitter.jpg" alt="Twitter"></a>
+          <a href="#"><img src="assets/images/contact/insta.jpg" alt="Instagram"></a>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+      <div class="copyright">© 2025 Super Linis. All Rights Reserved</div>
+      <div class="legal-links">
+        <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="text/javascript">
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
+    const headerLogo = document.getElementById('header-logo');
+
+    mobileMenu.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        document.body.classList.toggle('no-scroll'); 
+    });
+
+    window.addEventListener("scroll", function() {
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+
+        
+    if (window.scrollY > 50) { 
+      headerLogo.src = 'assets/images/contact/logo2.png'; 
+    } else {
+      headerLogo.src = 'assets/images/contact/logo1.png'; 
+    }
+    });
+
+    
+</script>
+</body>
+</html>

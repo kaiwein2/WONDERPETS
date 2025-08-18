@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Super Linis</title>
+    <link rel="stylesheet" href="admin_panel.css">
+    <style>
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 10px 0;
+            display: none;
+        }
+        .file-input-container {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .file-input-container input[type="file"] {
+            display: none;
+        }
+        .file-input-label {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: #6c93ff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .file-input-label:hover {
+            background-color: #3a5bb5;
+        }
+        .selected-file-name {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            word-break: break-all;
+        }
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+        .alert-success {
+            background-color: #4CAF50;
+        }
+        .alert-error {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="alert" class="alert">
+        <span id="alert-message"></span>
+    </div>
+
+    <header class="admin-header">
+        <h1>Admin Panel - Super Linis Cleaning Services</h1>
+        <nav class="admin-nav">
+            <a href="admin_panel.html" class="active">Service Management</a>
+            <a href="admin_reservations.html">Appointments</a>
+            <a href="index.html">Back to Site</a>
+        </nav>
+    </header>
+
+    <div class="admin-container">
+        <h2>Add New Service</h2>
+        <form id="add-menu-form" class="admin-form">
+            <div class="form-group">
+                <label for="name">Service Name</label>
+                <input type="text" name="name" id="name" placeholder="Enter service name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" placeholder="Enter service description" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price (₱)</label>
+                <input type="number" name="price" id="price" step="0.01" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="deep">Deep Cleaning</option>
+                    <option value="specialized">Specialized</option>
+                    <option value="maintenance">Maintenance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <div class="file-input-container">
+                    <label class="file-input-label">
+                        Choose Image
+                        <input type="file" name="image" id="image" accept="image/*" required onchange="previewImage(this)">
+                    </label>
+                    <span class="selected-file-name"></span>
+                </div>
+                <img id="imagePreview" class="image-preview">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="admin-btn">Add Service</button>
+            </div>
+        </form>
+
+        <h2>Current Services</h2>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Service Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="menu-table-body">
+                    <tr>
+                        <td>1</td>
+                        <td>Deep Home Cleaning</td>
+                        <td>Thorough cleaning for every room, leaving your home spotless and fresh.</td>
+                        <td>₱2,850.00</td>
+                        <td>Residential</td>
+                        <td><img src="images/truffle-risotto.png" alt="Deep Home Cleaning" width="100"></td>
+                        <td>
+                            <button class="admin-btn" onclick="editItem(1)">Edit</button>
+                            <button class="admin-btn secondary" onclick="deleteItem(1)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Upholstery & Carpet Cleaning</td>
+                        <td>Restore the look and feel of your furniture and carpets.</td>
+                        <td>₱3,200.00</td>
+                        <td>Specialized</td>
+                        <td><img src="images/duck-confit.png" alt="Upholstery & Carpet Cleaning" width="100"></td>
+                        <td>
+                            <button class="admin-btn" onclick="editItem(2)">Edit</button>
+                            <button class="admin-btn secondary" onclick="deleteItem(2)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Office Cleaning</td>
+                        <td>Professional cleaning for workspaces, meeting rooms, and common areas.</td>
+                        <td>₱4,500.00</td>
+                        <td>Commercial</td>
+                        <td><img src="wagyu-steak.png" alt="Office Cleaning" width="100"></td>
+                        <td>
+                            <button class="admin-btn" onclick="editItem(3)">Edit</button>
+                            <button class="admin-btn secondary" onclick="deleteItem(3)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Move-In/Move-Out Cleaning</td>
+                        <td>Detailed cleaning to prepare your space for new beginnings.</td>
+                        <td>₱3,800.00</td>
+                        <td>Deep Cleaning</td>
+                        <td><img src="seafood-platter.png" alt="Move-In/Move-Out Cleaning" width="100"></td>
+                        <td>
+                            <button class="admin-btn" onclick="editItem(4)">Edit</button>
+                            <button class="admin-btn secondary" onclick="deleteItem(4)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    let nextId = 5;
+
+    function showAlert(message, type) {
+        const alert = document.getElementById('alert');
+        const alertMessage = document.getElementById('alert-message');
+        
+        alertMessage.textContent = message;
+        alert.className = `alert alert-${type}`;
+        alert.style.display = 'block';
+        
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 3000);
+    }
+
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const fileNameSpan = input.parentElement.nextElementSibling;
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            preview.style.display = 'none';
+            fileNameSpan.textContent = '';
+        }
+    }
+
+    function addMenuItem(name, description, price, category, imageSrc) {
+        const tableBody = document.getElementById('menu-table-body');
+        const newRow = document.createElement('tr');
+        
+        newRow.innerHTML = `
+            <td>${nextId}</td>
+            <td>${name}</td>
+            <td>${description.length > 50 ? description.substring(0, 50) + '...' : description}</td>
+            <td>₱${parseFloat(price).toFixed(2)}</td>
+            <td>${category.charAt(0).toUpperCase() + category.slice(1)}</td>
+            <td><img src="${imageSrc}" alt="${name}" width="100"></td>
+            <td>
+                <button class="admin-btn" onclick="editItem(${nextId})">Edit</button>
+                <button class="admin-btn secondary" onclick="deleteItem(${nextId})">Delete</button>
+            </td>
+        `;
+        
+        tableBody.appendChild(newRow);
+        nextId++;
+    }
+
+    function editItem(id) {
+        showAlert('Edit functionality would be implemented with backend integration.', 'success');
+    }
+
+    function deleteItem(id) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            const row = document.querySelector(`tr td:first-child`);
+            if (row && row.textContent == id) {
+                row.parentElement.remove();
+                showAlert('Item deleted successfully!', 'success');
+            }
+        }
+    }
+
+    // Handle form submission
+    document.getElementById('add-menu-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        const description = formData.get('description');
+        const price = formData.get('price');
+        const category = formData.get('category');
+        const imageFile = formData.get('image');
+        
+        if (imageFile && imageFile.size > 0) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                addMenuItem(name, description, price, category, e.target.result);
+                showAlert('Menu item added successfully!', 'success');
+                document.getElementById('add-menu-form').reset();
+                document.getElementById('imagePreview').style.display = 'none';
+                document.querySelector('.selected-file-name').textContent = '';
+            };
+            reader.readAsDataURL(imageFile);
+        }
+    });
+    </script>
+</body>
+</html>

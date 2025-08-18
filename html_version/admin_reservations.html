@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reservations - Admin Panel</title>
+    <link rel="stylesheet" href="admin_panel.css">
+    <style>
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status-pending {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-confirmed {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-cancelled {
+            background-color: #dc3545;
+            color: white;
+        }
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+        }
+        .alert-success {
+            background-color: #4CAF50;
+        }
+        .alert-error {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="alert" class="alert">
+        <span id="alert-message"></span>
+    </div>
+
+    <header class="admin-header">
+        <h1>Manage Appointments</h1>
+        <nav class="admin-nav">
+            <a href="admin_panel.html">Service Management</a>
+            <a href="admin_reservations.html" class="active">Appointments</a>
+            <a href="index.html">Back to Site</a>
+        </nav>
+    </header>
+
+    <div class="admin-container">
+    <h2>All Cleaning Appointments</h2>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date & Time</th>
+                        <th>Client Name</th>
+                        <th>No. of Rooms/Areas</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="reservations-table-body">
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            Jan 15, 2025<br>
+                            7:00 PM
+                        </td>
+                        <td>Maria Dela Cruz</td>
+                        <td>3</td>
+                        <td>
+                            Email: maria@email.com<br>
+                            Phone: +63 912 345 6789
+                        </td>
+                        <td>
+                            <span class="status-badge status-pending">
+                                Pending
+                            </span>
+                        </td>
+                        <td>
+                            <button class="admin-btn" onclick="confirmReservation(1)">Confirm</button>
+                            <button class="admin-btn secondary" onclick="cancelReservation(1)">Cancel</button>
+                            <button class="admin-btn secondary" onclick="deleteReservation(1)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            Jan 16, 2025<br>
+                            8:00 PM
+                        </td>
+                        <td>Jerome Santos</td>
+                        <td>1</td>
+                        <td>
+                            Email: jerome@email.com<br>
+                            Phone: +63 923 456 7890
+                        </td>
+                        <td>
+                            <span class="status-badge status-confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+                        <td>
+                            <button class="admin-btn secondary" onclick="deleteReservation(2)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            Jan 17, 2025<br>
+                            6:30 PM
+                        </td>
+                        <td>Kiefer Alvarado</td>
+                        <td>5</td>
+                        <td>
+                            Email: kiefer@email.com<br>
+                            Phone: +63 934 567 8901
+                        </td>
+                        <td>
+                            <span class="status-badge status-pending">
+                                Pending
+                            </span>
+                        </td>
+                        <td>
+                            <button class="admin-btn" onclick="confirmReservation(3)">Confirm</button>
+                            <button class="admin-btn secondary" onclick="cancelReservation(3)">Cancel</button>
+                            <button class="admin-btn secondary" onclick="deleteReservation(3)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            Jan 18, 2025<br>
+                            7:30 PM
+                        </td>
+                        <td>Leo Ramirez</td>
+                        <td>2</td>
+                        <td>
+                            Email: leo@email.com<br>
+                            Phone: +63 945 678 9012
+                        </td>
+                        <td>
+                            <span class="status-badge status-cancelled">
+                                Cancelled
+                            </span>
+                        </td>
+                        <td>
+                            <button class="admin-btn secondary" onclick="deleteReservation(4)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            Jan 19, 2025<br>
+                            8:30 PM
+                        </td>
+                        <td>Angela Torres</td>
+                        <td>4</td>
+                        <td>
+                            Email: angela@email.com<br>
+                            Phone: +63 956 789 0123
+                        </td>
+                        <td>
+                            <span class="status-badge status-confirmed">
+                                Confirmed
+                            </span>
+                        </td>
+                        <td>
+                            <button class="admin-btn secondary" onclick="deleteReservation(5)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    function showAlert(message, type) {
+        const alert = document.getElementById('alert');
+        const alertMessage = document.getElementById('alert-message');
+        
+        alertMessage.textContent = message;
+        alert.className = `alert alert-${type}`;
+        alert.style.display = 'block';
+        
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 3000);
+    }
+
+    function confirmReservation(id) {
+        const row = findRowById(id);
+        if (row) {
+            const statusBadge = row.querySelector('.status-badge');
+            statusBadge.className = 'status-badge status-confirmed';
+            statusBadge.textContent = 'Confirmed';
+            // Update actions
+            const actionsCell = row.cells[6];
+            actionsCell.innerHTML = `
+                <button class="admin-btn secondary" onclick="deleteReservation(${id})">Delete</button>
+            `;
+            showAlert('Appointment confirmed successfully!', 'success');
+        }
+    }
+
+    function cancelReservation(id) {
+        const row = findRowById(id);
+        if (row) {
+            const statusBadge = row.querySelector('.status-badge');
+            statusBadge.className = 'status-badge status-cancelled';
+            statusBadge.textContent = 'Cancelled';
+            // Update actions
+            const actionsCell = row.cells[6];
+            actionsCell.innerHTML = `
+                <button class="admin-btn secondary" onclick="deleteReservation(${id})">Delete</button>
+            `;
+            showAlert('Appointment cancelled successfully!', 'success');
+        }
+    }
+
+    function deleteReservation(id) {
+        if (confirm('Are you sure you want to delete this appointment?')) {
+            const row = findRowById(id);
+            if (row) {
+                row.remove();
+                showAlert('Appointment deleted successfully!', 'success');
+            }
+        }
+    }
+
+    function findRowById(id) {
+        const rows = document.querySelectorAll('#reservations-table-body tr');
+        for (let row of rows) {
+            if (row.cells[0].textContent == id) {
+                return row;
+            }
+        }
+        return null;
+    }
+    </script>
+</body>
+</html>

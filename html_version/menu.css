@@ -1,0 +1,176 @@
+@keyframes headerFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+header {
+    background: rgba(31, 105, 150, 0.75) !important;
+    animation: headerFadeIn 0.7s ease;
+}
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    
+    background: #f5f5f5;
+}
+
+
+
+
+/* Footer */
+.site-footer {
+    padding: 40px 5%;
+    background: #fff;
+    color: #333;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-left {
+    flex: 2;
+    min-width: 280px;
+}
+
+.footer-left img {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.footer-left p {
+    color: #555;
+    margin: 10px 0 20px;
+    line-height: 1.6;
+}
+
+.footer-left .learn-more-link {
+    color: #6c93ff;
+    text-decoration: none;
+}
+
+.footer-left .learn-more-link:hover {
+    text-decoration: underline;
+}
+
+.footer-left .opening-hours p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-left .opening-hours strong {
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #333;
+    font-size: 15px;
+}
+
+.footer-nav {
+    flex: 1;
+    min-width: 180px;
+}
+
+.footer-nav h4,
+.footer-social h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 6px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: #6c93ff;
+}
+
+.footer-social {
+    flex: 1;
+    min-width: 180px;
+}
+
+.footer-social .social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social .social-icons img {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.site-footer hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 0;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #555;
+    margin-top: 20px;
+}
+
+.footer-bottom a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-bottom a:hover {
+    color: #6c93ff;
+}
+
+.opening-hours h5 {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.hours-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 16px;
+}
+
+.hours-grid .day {
+    font-size: 14px;
+    color: #333;
+}
+
+.hours-grid .time {
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+
