@@ -7,6 +7,371 @@
     <link rel="stylesheet" href="ABOUT.css">
     <link rel="stylesheet" href="headerv1.css">
    
+   <!-- Account System Styles -->
+    <style>
+        /* Account Dropdown Styles */
+        .account-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .account-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .account-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .account-btn::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform 0.3s ease;
+            margin-left: 5px;
+        }
+        
+        .account-dropdown.active .account-btn::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: rgb(62, 48, 48);
+            min-width: 200px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 8px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(0,0,0,0.08);
+            pointer-events: none;
+        }
+        
+        .account-dropdown.active .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            border-radius: 0;
+        }
+        
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .dropdown-item:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 8px 0;
+        }
+        
+        .dropdown-item.admin {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .dropdown-item.admin:hover {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            animation: modalSlideIn 0.3s ease;
+            overflow: hidden;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .form-switch a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .form-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Custom Alert Styles */
+        .custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            z-index: 3000;
+            min-width: 300px;
+            max-width: 400px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .custom-alert.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .alert-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .alert-header.success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .alert-header.error {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+        }
+        
+        .alert-header.admin {
+            background: linear-gradient(135deg, #FF6B6B 0%, #ee5a52 100%);
+        }
+        
+        .alert-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .alert-body {
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        .alert-message {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .alert-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .alert-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .alert-button.success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        }
+        
+        .alert-button.error {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+        }
+        
+        .alert-button.admin {
+            background: linear-gradient(135deg, #FF6B6B 0%, #ee5a52 100%);
+        }
+        
+        .alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 2999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .alert-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        @media (max-width: 768px) {
+            .account-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .dropdown-content {
+                min-width: 180px;
+            }
+        }
+    </style>
+
+
+
   </head>
 <body>
 
@@ -22,13 +387,130 @@
     </div>
     <ul class="nav-list">
       <li><a href="index.html">Home</a></li>    
-      <li><a href="menu.html">Menu</a></li>      
+      <li><a href="menu.html">Services</a></li>      
         <li><a href="reservation.html">Reservation</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="admin_panel.html" class="button">ADMIN</a></li>
-    </ul>
+               <div class="account-dropdown" id="accountDropdown">
+                    <button class="account-btn" onclick="toggleAccountDropdown()">Account</button>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item" onclick="openLoginModal()">Sign In</a>
+                        <a href="#" class="dropdown-item" onclick="openSignupModal()">Sign Up</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item admin" onclick="openAdminModal()">Admin Login</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+                <h2>Sign In</h2>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign In</button>
+                </form>
+                <div class="form-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignup()">Sign up here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('signupModal')">&times;</span>
+                <h2>Sign Up</h2>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </form>
+                <div class="form-switch">
+                    Already have an account? <a href="#" onclick="switchToLogin()">Sign in here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('adminModal')">&times;</span>
+                <h2>Admin Access</h2>
+            </div>
+            <div class="modal-body">
+                <form id="adminForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Admin Username</label>
+                        <input type="text" id="adminUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Admin Password</label>
+                        <input type="password" id="adminPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Admin Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('profileModal')">&times;</span>
+                <h2>User Profile</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profileName" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="profileEmail" readonly>
+                </div>
+                <p style="color: #666; text-align: center; margin-top: 20px;">
+                    Profile editing functionality can be implemented here
+                </p>
+            </div>
+        </div>
+    </div>
+
   </header>
     <section id="about" class="about-section">
         <div class="about-wrapper">
@@ -55,47 +537,22 @@
             <div class="team-member">
                 <img src="assets/images/about/lance.png" alt="Member 1">
                 <h3>Benemerito, Lance</h3>
-                <div class="social-icons">
-                  <a href="#" class="social-icon"><img src="assets/images/about/twitter.jpg" alt="Twitter"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/insta.jpg" alt="Instagram"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/fb.jpg" alt="Facebook"></a>
-                </div>
             </div>
             <div class="team-member">
                 <img src="assets/images/about/Kai.png" alt="Member 2">
                 <h3>Bulala, Kaizhel</h3>
-                <div class="social-icons">
-                 <a href="#" class="social-icon"><img src="assets/images/about/twitter.jpg" alt="Twitter"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/insta.jpg" alt="Instagram"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/fb.jpg" alt="Facebook"></a>
-                </div>
             </div>
             <div class="team-member">
                 <img src="assets/images/about/Jolo.png" alt="Member 3">
                 <h3>Cantre, John Lloyd</h3>
-                <div class="social-icons">
-                  <a href="#" class="social-icon"><img src="assets/images/about/twitter.jpg" alt="Twitter"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/insta.jpg" alt="Instagram"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/fb.jpg" alt="Facebook"></a>
-                </div>
             </div>
             <div class="team-member">
                 <img src="assets/images/about/Mj.png" alt="Member 4">
                 <h3>Raveche, Marlon</h3>
-                <div class="social-icons">
-                <a href="#" class="social-icon"><img src="assets/images/about/twitter.jpg" alt="Twitter"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/insta.jpg" alt="Instagram"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/fb.jpg" alt="Facebook"></a>
-                </div>
             </div>
             <div class="team-member">
                 <img src="assets/images/about/Kat.png" alt="Member 5">
                 <h3>Tampus, Ma. Katrina</h3>
-                <div class="social-icons">
-                  <a href="#" class="social-icon"><img src="assets/images/about/twitter.jpg" alt="Twitter"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/insta.jpg" alt="Instagram"></a>
-                  <a href="#" class="social-icon"><img src="assets/images/about/fb.jpg" alt="Facebook"></a>
-                </div>
             </div>
            
         </div>
@@ -128,7 +585,7 @@
             <h4>NAVIGATION</h4>
             <ul>
               <li><a href="index.html">Home</a></li>
-              <li><a href="menu.html">Menu</a></li>
+              <li><a href="menu.html">Services</a></li>
               <li><a href="gallery.html">Gallery</a></li>
               <li><a href="reservation.html">Reservations</a></li>
               <li><a href="about.html">About Us</a></li>
@@ -180,6 +637,277 @@
       });
   
       
-  </script>
-</body>
+        // Custom Alert Function
+        function showCustomAlert(message, type = 'info', callback = null) {
+            // Remove existing alert if any
+            const existingAlert = document.querySelector('.custom-alert');
+            const existingOverlay = document.querySelector('.alert-overlay');
+            if (existingAlert) existingAlert.remove();
+            if (existingOverlay) existingOverlay.remove();
+            
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'alert-overlay';
+            
+            // Create alert
+            const alert = document.createElement('div');
+            alert.className = 'custom-alert';
+            
+            // Determine alert type
+            let title = 'Notification';
+            let headerClass = '';
+            let buttonClass = '';
+            
+            switch(type) {
+                case 'success':
+                    title = 'Success!';
+                    headerClass = 'success';
+                    buttonClass = 'success';
+                    break;
+                case 'error':
+                    title = 'Error!';
+                    headerClass = 'error';
+                    buttonClass = 'error';
+                    break;
+                case 'admin':
+                    title = 'Admin Access';
+                    headerClass = 'admin';
+                    buttonClass = 'admin';
+                    break;
+                default:
+                    title = 'Notification';
+                    headerClass = '';
+                    buttonClass = '';
+            }
+            
+            alert.innerHTML = `
+                <div class="alert-header ${headerClass}">
+                    <h3 class="alert-title">${title}</h3>
+                </div>
+                <div class="alert-body">
+                    <p class="alert-message">${message}</p>
+                    <button class="alert-button ${buttonClass}" onclick="closeCustomAlert()">OK</button>
+                </div>
+            `;
+            
+            document.body.appendChild(overlay);
+            document.body.appendChild(alert);
+            
+            // Show with animation
+            setTimeout(() => {
+                overlay.classList.add('show');
+                alert.classList.add('show');
+            }, 10);
+            
+            // Store callback for later use
+            window.currentAlertCallback = callback;
+        }
+        
+        function closeCustomAlert() {
+            const alert = document.querySelector('.custom-alert');
+            const overlay = document.querySelector('.alert-overlay');
+            
+            if (alert && overlay) {
+                alert.classList.remove('show');
+                overlay.classList.remove('show');
+                
+                setTimeout(() => {
+                    if (alert.parentNode) alert.remove();
+                    if (overlay.parentNode) overlay.remove();
+                    
+                    // Execute callback if exists
+                    if (window.currentAlertCallback) {
+                        window.currentAlertCallback();
+                        window.currentAlertCallback = null;
+                    }
+                }, 300);
+            }
+        }
+        let isLoggedIn = false;
+        let currentUser = null;
+
+        // Account system functions
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('accountDropdown');
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function updateAccountDropdown(userName) {
+            const accountBtn = document.querySelector('.account-btn');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            accountBtn.textContent = userName;
+            
+            dropdownContent.innerHTML = `
+                <a href="#" class="dropdown-item" onclick="openProfileModal()">Profile</a>
+                <a href="#" class="dropdown-item" onclick="logout()">Log Out</a>
+            `;
+        }
+
+        function resetAccountDropdown() {
+            const accountBtn = document.querySelector('.account-btn');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            accountBtn.textContent = 'Account';
+            
+            dropdownContent.innerHTML = `
+                <a href="#" class="dropdown-item" onclick="openLoginModal()">Sign In</a>
+                <a href="#" class="dropdown-item" onclick="openSignupModal()">Sign Up</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item admin" onclick="openAdminModal()">Admin Login</a>
+            `;
+        }
+
+        function openProfileModal() {
+            document.getElementById('profileModal').style.display = 'block';
+            document.getElementById('accountDropdown').classList.remove('active');
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            resetAccountDropdown();
+            showCustomAlert('You have been logged out successfully!', 'success');
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('accountDropdown').classList.remove('active');
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.getElementById('accountDropdown').classList.remove('active');
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'block';
+            document.getElementById('accountDropdown').classList.remove('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function switchToSignup() {
+            closeModal('loginModal');
+            openSignupModal();
+        }
+
+        function switchToLogin() {
+            closeModal('signupModal');
+            openLoginModal();
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = ['loginModal', 'signupModal', 'adminModal', 'profileModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    closeModal(modalId);
+                }
+            });
+        });
+
+        // Form submissions (you can customize these)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Add your login logic here
+            // For demo purposes, we'll simulate a successful login
+            if (email && password) {
+                isLoggedIn = true;
+                currentUser = {
+                    name: email.split('@')[0], // Use part of email as name for demo
+                    email: email
+                };
+                
+                // Update profile modal with user data
+                document.getElementById('profileName').value = currentUser.name;
+                document.getElementById('profileEmail').value = currentUser.email;
+                
+                updateAccountDropdown(currentUser.name);
+                showCustomAlert('Login successful!', 'success');
+                closeModal('loginModal');
+            } else {
+                showCustomAlert('Please fill in all fields', 'error');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+                            if (name && email && password) {
+                isLoggedIn = true;
+                currentUser = {
+                    name: name,
+                    email: email
+                };
+                
+                // Update profile modal with user data
+                document.getElementById('profileName').value = name;
+                document.getElementById('profileEmail').value = email;
+                
+                updateAccountDropdown(currentUser.name);
+                alert('Account created successfully!');
+                closeModal('signupModal');
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            // Add your admin login logic here
+            // For demo purposes, let's redirect to admin panel
+            if (username === 'admin' && password === 'admin123') {
+                // Redirect to admin panel instead of updating dropdown
+                showCustomAlert('Admin login successful! Redirecting to admin panel...', 'admin', () => {
+                    window.location.href = 'admin_panel.html';
+                });
+            } else {
+                showCustomAlert('Invalid admin credentials!', 'error');
+            }
+        });
+
+        // Make functions globally available
+        window.nextTestimonial = nextTestimonial;
+        window.prevTestimonial = prevTestimonial;
+        window.toggleAccountDropdown = toggleAccountDropdown;
+        window.openLoginModal = openLoginModal;
+        window.openSignupModal = openSignupModal;
+        window.openAdminModal = openAdminModal;
+        window.openProfileModal = openProfileModal;
+        window.logout = logout;
+        window.closeModal = closeModal;
+        window.switchToSignup = switchToSignup;
+        window.switchToLogin = switchToLogin;
+        window.showCustomAlert = showCustomAlert;
+        window.closeCustomAlert = closeCustomAlert;
+    </script>
+</body>	
+
 </html>
